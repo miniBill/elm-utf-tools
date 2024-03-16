@@ -26,7 +26,7 @@ lengthTest =
                         UTF8.length input
                             |> Expect.equal output
             )
-        |> describe "length"
+        |> describe "length - UTF8"
 
 
 toBytesTest : Test
@@ -39,7 +39,7 @@ toBytesTest =
                         UTF8.toBytes input
                             |> Expect.equal output
             )
-        |> describe "bytes"
+        |> describe "bytes - UTF8"
 
 
 toStringTest : Test
@@ -52,4 +52,4 @@ toStringTest =
                         UTF8.toString input
                             |> Expect.equal (Ok output)
             )
-        |> describe "bytes to String"
+        |> describe "bytes to String - UTF8"

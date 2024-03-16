@@ -26,7 +26,7 @@ lengthTest =
                         UTF32.length input
                             |> Expect.equal output
             )
-        |> describe "length"
+        |> describe "length - UTF32"
 
 
 toBytesTest : Test
@@ -39,7 +39,7 @@ toBytesTest =
                         UTF32.toBytes input
                             |> Expect.equal output
             )
-        |> describe "bytes"
+        |> describe "bytes - UTF32"
 
 
 toStringTest : Test
@@ -52,4 +52,4 @@ toStringTest =
                         UTF32.toString input
                             |> Expect.equal output
             )
-        |> describe "bytes to String"
+        |> describe "bytes to String - UTF32"
