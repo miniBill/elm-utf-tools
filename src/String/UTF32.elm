@@ -7,7 +7,6 @@ the right place!
 
 -}
 
-import Bitwise exposing (and, or, shiftLeftBy, shiftRightZfBy)
 import Char
 
 

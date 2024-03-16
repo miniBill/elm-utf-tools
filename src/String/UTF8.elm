@@ -8,7 +8,6 @@ how to go back and forth between UTF-32 and UTF-8? I hear ya.
 -}
 
 import Bitwise exposing (and, or, shiftLeftBy, shiftRightZfBy)
-import String.UTF32 as UTF32
 
 
 {-| Convert a sequence of UTF-8 bytes to an Elm `String`.
@@ -126,10 +125,6 @@ foldl op initialAcc input =
 length : String -> Int
 length input =
     foldl (always <| (+) 1) 0 input
-
-
-type alias Accumulator a =
-    ( a, Maybe Int )
 
 
 utf32ToUtf8 : (Int -> a -> a) -> Int -> a -> a

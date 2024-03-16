@@ -1,8 +1,8 @@
-module UTF32Test exposing (cases, lengthTest, toBytesTest, toStringTest)
+module UTF32Test exposing (lengthTest, toBytesTest, toStringTest)
 
-import Expect exposing (Expectation)
+import Expect
 import String.UTF32 as UTF32
-import Test exposing (..)
+import Test exposing (Test, describe, test)
 
 
 cases : List ( String, List Int )
