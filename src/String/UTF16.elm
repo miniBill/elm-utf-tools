@@ -17,7 +17,8 @@ import Bytes.Decode
 import Bytes.Encode
 
 
-{-| -}
+{-| Like `String.foldr`, but working on utf16 bytes as opposed to `Chars`.
+-}
 foldr : (Int -> acc -> acc) -> acc -> String -> acc
 foldr op initialAcc string =
     String.foldr (utf32ToUtf16Bytes op) initialAcc string
@@ -35,6 +36,7 @@ utf32ToUtf16Bytes op char acc =
 
     else
         let
+            c : Int
             c =
                 int - 0x00010000
         in
@@ -85,9 +87,11 @@ fromList bytes =
 toString : Bytes.Endianness -> Bytes -> Maybe String
 toString endianess bytes =
     let
+        width : Int
         width =
             Bytes.width bytes
 
+        decoder : Bytes.Decode.Decoder String
         decoder =
             Bytes.Decode.loop ( width, [], Nothing ) (utf16ToUtf32 endianess)
     in
@@ -126,6 +130,7 @@ utf16ToUtf32 endianess ( left, acc, combine ) =
 
                             Just prev ->
                                 let
+                                    x : Char
                                     x =
                                         prev
                                             |> and 0x03FF
