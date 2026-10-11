@@ -1,4 +1,4 @@
-module UTF8Test exposing (cases, fromListTest, lengthTest, toListTest)
+module UTF8Test exposing (fromListTest, lengthTest, toListTest)
 
 import Expect
 import String.UTF8 as UTF8
