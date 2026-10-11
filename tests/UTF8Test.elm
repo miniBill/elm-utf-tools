@@ -1,4 +1,4 @@
-module UTF8Test exposing (lengthTest, toBytesTest, toStringTest)
+module UTF8Test exposing (cases, fromListTest, lengthTest, toListTest)
 
 import Expect
 import String.UTF8 as UTF8
@@ -29,27 +29,27 @@ lengthTest =
         |> describe "length - UTF8"
 
 
-toBytesTest : Test
-toBytesTest =
+toListTest : Test
+toListTest =
     cases
         |> List.map
             (\( input, output ) ->
                 test ("'" ++ input ++ "' to bytes") <|
                     \_ ->
-                        UTF8.toBytes input
+                        UTF8.toList input
                             |> Expect.equal output
             )
         |> describe "bytes - UTF8"
 
 
-toStringTest : Test
-toStringTest =
+fromListTest : Test
+fromListTest =
     cases
         |> List.map
             (\( output, input ) ->
                 test ("decode into '" ++ output ++ "'") <|
                     \_ ->
-                        UTF8.toString input
+                        UTF8.fromList input
                             |> Expect.equal (Ok output)
             )
         |> describe "bytes to String - UTF8"

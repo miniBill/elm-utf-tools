@@ -1,4 +1,4 @@
-module UTF32Test exposing (lengthTest, toBytesTest, toStringTest)
+module UTF32Test exposing (cases, fromListTest, lengthTest, toListTest)
 
 import Expect
 import String.UTF32 as UTF32
@@ -29,27 +29,27 @@ lengthTest =
         |> describe "length - UTF32"
 
 
-toBytesTest : Test
-toBytesTest =
+toListTest : Test
+toListTest =
     cases
         |> List.map
             (\( input, output ) ->
                 test ("'" ++ input ++ "' to bytes") <|
                     \_ ->
-                        UTF32.toBytes input
+                        UTF32.toList input
                             |> Expect.equal output
             )
         |> describe "bytes - UTF32"
 
 
-toStringTest : Test
-toStringTest =
+fromListTest : Test
+fromListTest =
     cases
         |> List.map
             (\( output, input ) ->
                 test ("decode into '" ++ output ++ "'") <|
                     \_ ->
-                        UTF32.toString input
+                        UTF32.fromList input
                             |> Expect.equal output
             )
         |> describe "bytes to String - UTF32"
