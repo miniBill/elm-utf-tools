@@ -1,9 +1,9 @@
-module String.UTF8 exposing (length, toBytes, toString, foldl)
+module String.UTF8 exposing (length, toList, fromList, foldl)
 
 {-| Need UTF-8 bytes for your algorithm? Don't want to waste time investigating
 how to go back and forth between UTF-32 and UTF-8? I hear ya.
 
-@docs length, toBytes, toString, foldl
+@docs length, toList, fromList, foldl
 
 -}
 
@@ -15,20 +15,20 @@ import Bytes.Encode
 
     import String.UTF8 as UTF8
 
-    UTF8.toString [ 0x68, 0x65, 0x6C, 0x6C, 0x6F ]
+    UTF8.fromList [ 0x68, 0x65, 0x6C, 0x6C, 0x6F ]
     --> Ok "hello"
 
-    UTF8.toString [ 0xF0, 0x9F, 0x92, 0xA9 ]
+    UTF8.fromList [ 0xF0, 0x9F, 0x92, 0xA9 ]
     --> Ok "💩"
 
 If the input is not a valid UTF-8 sequence, you'll receive an error.
 
-    UTF8.toString [ 0xF0]
+    UTF8.fromList [ 0xF0]
     --> Err "invalid UTF-8 sequence"
 
 -}
-toString : List Int -> Result String String
-toString input =
+fromList : List Int -> Result String String
+fromList input =
     foldlUTF8 (\char string -> string ++ utf32ByteToString char) "" input
 
 
@@ -83,12 +83,12 @@ type alias UTF8Acc a =
 
     import String.UTF8 as UTF8
 
-    UTF8.toBytes "✓ a-ok"
+    UTF8.toList "✓ a-ok"
     --> [ 0xe2, 0x9c, 0x93, 0x20, 0x61, 0x2D, 0x6F, 0x6B ]
 
 -}
-toBytes : String -> List Int
-toBytes input =
+toList : String -> List Int
+toList input =
     foldl (::) [] input |> List.reverse
 
 
