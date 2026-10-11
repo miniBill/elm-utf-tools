@@ -7,8 +7,6 @@ the right place!
 
 -}
 
-import Char
-
 
 {-| Build a `String` from a list of unicode codepoints.
 
@@ -65,8 +63,3 @@ toList string =
 foldl : (Int -> a -> a) -> a -> String -> a
 foldl op initial input =
     String.foldl (\c acc -> op (Char.toCode c) acc) initial input
-
-
-byteToString : Int -> String
-byteToString int =
-    Char.fromCode int |> String.fromChar
