@@ -58,8 +58,8 @@ length =
 {-| Turn a `String` into a the corresponding UTF-16 bytes.
 -}
 fromString : Bytes.Endianness -> String -> Bytes
-fromString endianess s =
-    foldr (\e acc -> Bytes.Encode.unsignedInt16 endianess e :: acc) [] s
+fromString endianness s =
+    foldr (\e acc -> Bytes.Encode.unsignedInt16 endianness e :: acc) [] s
         |> Bytes.Encode.sequence
         |> Bytes.Encode.encode
 
@@ -85,7 +85,7 @@ fromList bytes =
 {-| Turn UTF-16 bytes into a `String`.
 -}
 toString : Bytes.Endianness -> Bytes -> Maybe String
-toString endianess bytes =
+toString endianness bytes =
     let
         width : Int
         width =
@@ -93,7 +93,7 @@ toString endianess bytes =
 
         decoder : Bytes.Decode.Decoder String
         decoder =
-            Bytes.Decode.loop ( width, [], Nothing ) (utf16ToUtf32 endianess)
+            Bytes.Decode.loop ( width, [], Nothing ) (utf16ToUtf32 endianness)
     in
     Bytes.Decode.decode decoder bytes
 
@@ -103,7 +103,7 @@ type alias UTF16Acc =
 
 
 utf16ToUtf32 : Bytes.Endianness -> UTF16Acc -> Bytes.Decode.Decoder (Bytes.Decode.Step UTF16Acc String)
-utf16ToUtf32 endianess ( left, acc, combine ) =
+utf16ToUtf32 endianness ( left, acc, combine ) =
     if left <= 0 then
         case combine of
             Just _ ->
@@ -116,7 +116,7 @@ utf16ToUtf32 endianess ( left, acc, combine ) =
                     |> Bytes.Decode.succeed
 
     else
-        Bytes.Decode.unsignedInt16 endianess
+        Bytes.Decode.unsignedInt16 endianness
             |> Bytes.Decode.map
                 (\char ->
                     Bytes.Decode.Loop <|
