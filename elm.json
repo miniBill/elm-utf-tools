@@ -1,14 +1,10 @@
 {
     "type": "package",
-    "name": "zwilias/elm-utf-tools",
-    "summary": "Convert between unicode codepoints/UTF-32, UTF-16 and UTF-8.",
+    "name": "miniBill/elm-utf-tools",
+    "summary": "Encode and decode UTF-8, UTF-16 and UTF-32. Fork of zwilias/elm-utf-tools",
     "license": "BSD-3-Clause",
-    "version": "2.0.1",
-    "exposed-modules": [
-        "String.UTF32",
-        "String.UTF16",
-        "String.UTF8"
-    ],
+    "version": "1.0.0",
+    "exposed-modules": ["String.UTF8", "String.UTF16", "String.UTF32"],
     "elm-version": "0.19.0 <= v < 0.20.0",
     "dependencies": {
         "elm/bytes": "1.0.8 <= v < 2.0.0",
